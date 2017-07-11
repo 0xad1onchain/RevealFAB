@@ -10,7 +10,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import io.codetail.animation.RevealFrameLayout;
 import io.codetail.animation.SupportAnimator;
@@ -22,6 +24,7 @@ public class RevealFAB extends FrameLayout {
 
     private static OnClickListener onClickListener;
     private RevealFrameLayout fabLayout;
+    private RelativeLayout containerLayout;
     private FloatingActionButton fab;
     private TypedArray attrs;
     private int fabBackground;
@@ -66,6 +69,7 @@ public class RevealFAB extends FrameLayout {
     private void loadViews() {
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fabLayout = (RevealFrameLayout) findViewById(R.id.fab_container);
+        containerLayout = (RelativeLayout) findViewById(R.id.layout_container);
     }
 
     private void registerListeners() {
@@ -84,6 +88,10 @@ public class RevealFAB extends FrameLayout {
             fab.setBackgroundTintList(ColorStateList.valueOf(attrs.getColor(R.styleable.RevealFAB_fab_color, white)));
             fabBackground = attrs.getColor(R.styleable.RevealFAB_reveal_color, 0);
             fabLayout.setBackgroundColor(fabBackground);
+            ViewGroup.MarginLayoutParams params = (MarginLayoutParams) fab.getLayoutParams();
+            //fab.setPadding(attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_left, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_top, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_right, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_bottom, 5));
+            params.setMargins(attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_left, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_top, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_right, 5), attrs.getDimensionPixelSize(R.styleable.RevealFAB_margin_bottom, 5));
+            fab.setLayoutParams(params);
         } finally {
             attrs.recycle();
         }

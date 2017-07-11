@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:fab_color="@color/colorAccent"
         app:fab_icon="@android:drawable/ic_dialog_email"
-        app:reveal_color="@color/colorAccent" />
+        app:reveal_color="@color/colorAccent"
+        app:margin_top="100dp"/>
 
 </LinearLayout>
